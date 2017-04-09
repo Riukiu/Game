@@ -12,6 +12,7 @@
   "dependencies": {
     "browserify": "^14.3.0",
     "express": "^4.14.1",
+    "jquery": "^3.2.1",
     "socket.io": "^1.7.3"
   },
   "devDependencies": {
