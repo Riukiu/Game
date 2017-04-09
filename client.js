@@ -67,3 +67,8 @@ $(document).on('keyup', function(event){
 		socket.emit('input', {cmd: 'RIGHT_RELEASED', clientId : ident});
 
 });
+
+$(document).on('click', function(event){
+	socket.emit('input', {cmd: 'CLICK', clientId : ident});
+	console.log(event);
+	});

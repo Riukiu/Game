@@ -1,6 +1,7 @@
 var environment = {
 	players: {},
-	objects: []
+	objects: [],
+	balls : []
 };
 var express = require('express');
 var app = express();
@@ -58,8 +59,14 @@ function processInput(input){
 		case 'RIGHT_RELEASED':
 			player.direction.x = 0;
 			break;
+		case 'CLICK':
+			onClick();
 
 	}
+}
+
+function onClick() {
+
 }
 function resolveColisions(ide){
 	for (var i in environment.players) {
@@ -105,6 +112,6 @@ app.use(express.static('public'));
 server.listen(process.env.PORT || 5000, function() {
 
 
-	console.log('Jeu lancé, écoute sur le port 80');
+	console.log('Jeu lancé, écoute sur le port' + process.env.PORT);
 });
 
