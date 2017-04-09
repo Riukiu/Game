@@ -1,7 +1,7 @@
 var environment = {
 	players: {},
 	objects: [],
-	balle : []
+	balle : {}
 };
 var express = require('express');
 var app = express();

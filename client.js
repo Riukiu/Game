@@ -14,7 +14,7 @@ balle.src = 'http://www.fancyicons.com/free-icons/233/fast-foods/png/32/taco_32.
 var environment = {
 	players: {},
 	objects: [],
-	balle : []
+	balle : {}
 };
 
 function drawPlayer(playerId) {
