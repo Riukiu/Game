@@ -1,11 +1,12 @@
 var environment = {
 	players: {},
 	objects: [],
-	balls : []
+	balle : []
 };
 var express = require('express');
 var app = express();
 var ident = 0;
+var ident_ball = 0;
 var cident = 0;
 var play_width = 80
 var play_height = 80
@@ -27,9 +28,16 @@ function updatePlayer(playerId) {
 	}
 }
 
+function updateBalls(balle_id) {
+	var tacos = environment.balle[balle_id];
+	tacos.x += tacos.direction.x/(tacos.x+1) * (player.speed/30);
+	tacos.y += tacos.direction.x/(tacos.y+1) * (player.speed/30);
+}
+
 function updateEnvironment() {
 
 	Object.keys(environment.players).forEach(updatePlayer);
+	Object.keys(environment.balle).forEach(updateBalls);
 }
 
 function processInput(input){
@@ -60,12 +68,14 @@ function processInput(input){
 			player.direction.x = 0;
 			break;
 		case 'CLICK':
-			onClick();
+			onClick(input);
 
 	}
 }
 
-function onClick() {
+function onClick(input) {
+	environment.balle[ident_ball] = {direction : {x : input.mouseX, y: input.mouseY}, speed : 400, x : environment.player[clientId].x , y: environment.player[clientId].y, ident : ident_ball};
+	ident_ball += 1;
 
 }
 function resolveColisions(ide){
@@ -96,7 +106,7 @@ function gameLoop() {
 setInterval(gameLoop, 1000/30);
 
 function newConnection(socket){
-	environment.players[ident] = {direction : {x : 0, y: 0}, speed : 400, x : Math.random()*849, y: Math.random()*499, ident : ident };
+	environment.players[ident] = {direction : {x : 0, y: 0}, speed : 400, x : Math.random()*849, y: Math.random()*499, ident : ident, balls : 0 };
 	socket.emit('ident', {ident: ident});
 	ident += 1;
 	socket.on('input', function(userInputs) {
