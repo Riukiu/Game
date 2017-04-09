@@ -101,7 +101,7 @@ io.on('connection', newConnection);
 
 app.use(express.static('public'));
 
-server.listen(3000, function() {
+server.listen(80, function() {
 
-	console.log('Jeu lancé, écoute sur le port 3000');
+	console.log('Jeu lancé, écoute sur le port 80');
 });
