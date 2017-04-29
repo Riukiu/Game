@@ -1,6 +1,6 @@
 var environment = {
 	players: {},
-	objects: [],
+	objects: {},
 	balle : {}
 };
 var express = require('express');
@@ -34,10 +34,23 @@ function updateBalls(balle_id) {
 	tacos.y += tacos.direction.x/(tacos.y+1) * (player.speed/30);
 }
 
+function showObjetcs(objId){
+	/*var obj1 = environment.objects[objId];
+	obj1.direction.x = 0;
+	obj1.direction.y = 10;
+	console.log(obj1);*/
+	var cactus = environment.objects[objId];
+	cactus.x = 10;
+	cactus.y = 310;
+
+
+}
+
 function updateEnvironment() {
 
 	Object.keys(environment.players).forEach(updatePlayer);
 	Object.keys(environment.balle).forEach(updateBalls);
+	Object.keys(environment.objects).forEach(showObjetcs);
 }
 
 function processInput(input){
@@ -108,6 +121,7 @@ setInterval(gameLoop, 1000/30);
 
 function newConnection(socket){
 	environment.players[ident] = {direction : {x : 0, y: 0}, speed : 400, x : Math.random()*849, y: Math.random()*499, ident : ident, balls : 0 };
+	environment.objects[ident_ball] = {x:0, y:0};
 	socket.emit('ident', {ident: ident});
 	ident += 1;
 	socket.on('input', function(userInputs) {
@@ -116,12 +130,7 @@ function newConnection(socket){
 	});
 }
 io.on('connection', newConnection);
-
 app.use(express.static('public'));
-
-
 server.listen(process.env.PORT || 5000, function() {
-
-
 	console.log('Jeu lancé, écoute sur le port' + process.env.PORT);
 });

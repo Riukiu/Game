@@ -6,14 +6,17 @@ var context = canvas.getContext('2d');
 var imagepointeur = new Image();
 var background = new Image();
 var balle = new Image();
+var obstacle = new Image();
 
 imagepointeur.src = 'http://www.clipartkid.com/images/667/understanding-stereotypes-canada-vs-america-change-the-topic-zbYWuV-clipart.png';
 background.src = 'http://pingouin.migrateur.free.fr/voyages/mexique/desert1.jpg';
 balle.src = 'http://www.fancyicons.com/free-icons/233/fast-foods/png/32/taco_32.png';
+obstacle.src = 'http://img1.wikia.nocookie.net/__cb20140622060452/plantsvszombies/images/f/f0/138px-CactusPvZAS.png';
+
 
 var environment = {
 	players: {},
-	objects: [],
+	objects: {},
 	balle : {}
 };
 
@@ -23,22 +26,27 @@ function drawPlayer(playerId) {
 
 }
 
+
 function drawBalle(balls){
 	var tacos = environment.balle[balls];
 	context.drawImage(balle, tacos.x, tacos.y);
 
 }
 
-function drawObject(object) {
 
+function drawObject(cactusId) {
+var cactus = environment.objects[cactusId];
+context.drawImage(obstacle, cactus.x, cactus.y, 80, 120);
 
 }
+
 
 function renderLoop(){
 	context.clearRect(0,0,canvas.width,canvas.height);
 	context.drawImage(background,0,0);
 	Object.keys(environment.players).forEach(drawPlayer);
 	Object.keys(environment.balle).forEach(drawBalle);
+	Object.keys(environment.objects).forEach(drawObject);
 	context.stroke();
 	window.requestAnimationFrame(renderLoop);
 }
@@ -78,7 +86,9 @@ $(document).on('keyup', function(event){
 
 });
 
+/*
 $(document).on('click', function(event){
 	socket.emit('input', {cmd: 'CLICK', clientId : ident, mouseX : event.originalEvent.clientX, mouseY : event.originalEvent.clientY});
 	console.log(event);
 	});
+	*/
