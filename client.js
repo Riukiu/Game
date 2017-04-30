@@ -7,11 +7,13 @@ var imagepointeur = new Image();
 var background = new Image();
 var balle = new Image();
 var obstacle = new Image();
+var stone = new Image();
 
 imagepointeur.src = 'http://www.clipartkid.com/images/667/understanding-stereotypes-canada-vs-america-change-the-topic-zbYWuV-clipart.png';
 background.src = 'http://pingouin.migrateur.free.fr/voyages/mexique/desert1.jpg';
 balle.src = 'http://www.fancyicons.com/free-icons/233/fast-foods/png/32/taco_32.png';
 obstacle.src = 'http://img1.wikia.nocookie.net/__cb20140622060452/plantsvszombies/images/f/f0/138px-CactusPvZAS.png';
+stone.src = 'http://www.pngall.com/wp-content/uploads/2016/03/Camel-PNG.png';
 
 
 var environment = {
@@ -23,23 +25,29 @@ var environment = {
 function drawPlayer(playerId) {
 	var player = environment.players[playerId];
 	context.drawImage(imagepointeur, player.x, player.y, 80,80);
-
 }
-
 
 function drawBalle(balls){
 	var tacos = environment.balle[balls];
 	context.drawImage(balle, tacos.x, tacos.y);
-
 }
 
-
+/*
 function drawObject(cactusId) {
 var cactus = environment.objects[cactusId];
 context.drawImage(obstacle, cactus.x, cactus.y, 80, 120);
 
 }
+*/
 
+function drawObject() {
+var cactus1 = environment.objects[0];
+var cactus2 = environment.objects[1];
+var stone1 = environment.objects[2];
+context.drawImage(obstacle, cactus1.x, cactus1.y, 80, 120);
+context.drawImage(obstacle, cactus2.x, cactus2.y, 40, 70);
+context.drawImage(stone, stone1.x, stone1.y, 100, 60);
+}
 
 function renderLoop(){
 	context.clearRect(0,0,canvas.width,canvas.height);
@@ -59,8 +67,6 @@ socket.on('ident', function(data) {
 	ident = data.ident;
 
 });
-
-
 
 $(document).on('keydown', function(event){
 	if(event.keyCode == 38)

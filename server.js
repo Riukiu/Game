@@ -15,16 +15,20 @@ var io = require('socket.io')(server);
 
 function updatePlayer(playerId) {
 	var player = environment.players[playerId];
-	var colisions = resolveColisions(playerId);
-	if (player.x +(player.direction.x*player.speed/30) > 0 & player.x +(player.direction.x * player.speed/30) < 850 & !colisions)
-		player.x += player.direction.x * player.speed/30;
-	if (player.y +(player.direction.y*player.speed/30) > 10 & player.y +(player.direction.y * player.speed/30) < 500 & !colisions)
-		player.y += player.direction.y * player.speed/30;
-	if (colisions ) {
-		if (player.x - player.direction.x*20 < 850 & player.x - player.direction.x*20 > 0)
+	var colisions = resolveColisionsPlayers(playerId);
+	var colisionsObj = resolveColisionsObjects(playerId);
+	var pSpeed = (player.speed/30);
+
+	if (player.x +(player.direction.x*pSpeed) > 0 & player.x +(player.direction.x * pSpeed) < 900 & !colisions)
+		player.x += player.direction.x * pSpeed;
+	if (player.y +(player.direction.y*pSpeed) > 10 & player.y +(player.direction.y * pSpeed) < 500 & !colisions)
+		player.y += player.direction.y * pSpeed;
+	if (colisions || colisionsObj) {
+		if (player.x - player.direction.x*20 < 900 & player.x - player.direction.x*20 > 0)
 			player.x -= player.direction.x*20;
 		if (player.y - player.direction.y*20 < 500 & player.y - player.direction.y*20 > 10)
 			player.y -= player.direction.y*20;
+
 	}
 }
 
@@ -34,16 +38,16 @@ function updateBalls(balle_id) {
 	tacos.y += tacos.direction.x/(tacos.y+1) * (player.speed/30);
 }
 
-function showObjetcs(objId){
-	/*var obj1 = environment.objects[objId];
-	obj1.direction.x = 0;
-	obj1.direction.y = 10;
-	console.log(obj1);*/
-	var cactus = environment.objects[objId];
-	cactus.x = 10;
-	cactus.y = 310;
-
-
+function showObjetcs(){
+	var cactus1 = environment.objects[0];
+	var cactus2 = environment.objects[1];
+	var stone = environment.objects[2];
+	cactus1.x = 10;
+	cactus1.y = 310;
+	cactus2.x = 700;
+	cactus2.y = 390;
+	stone.x = 400;
+	stone.y = 400;
 }
 
 function updateEnvironment() {
@@ -92,7 +96,7 @@ function onClick(input) {
 
 }
 */
-function resolveColisions(ide){
+function resolveColisionsPlayers(ide){
 	for (var i in environment.players) {
 		if (i != ide){
 			if (collide_players(ide,i)){
@@ -101,8 +105,19 @@ function resolveColisions(ide){
 		}
 	}
 return false;
-
 }
+
+function resolveColisionsObjects(ide){
+	for (var i in environment.objects){
+		if(collide_objects(ide, i)){
+			return true;
+		}
+	}
+	return false;
+}
+
+
+
 function collide_players(obj1,obj2) {
 	var play1 = environment.players[obj1];
 	var play2 = environment.players[obj2];
@@ -111,9 +126,17 @@ function collide_players(obj1,obj2) {
 		   (play1.y + (play1.direction.y*play1.speed/30)) + play_height > play2.y &&
 		   (play2.y + (play2.direction.y*play2.speed/30))+ play_height > play1.y;
 }
+
+function collide_objects(obj1, obj2){
+	var play  = environment.players[obj1];
+	var obj = environment.objects[obj2];
+	return (play.x + (play.direction.x*play.speed/30)) + play_width > obj.x &&
+				(obj.x + play_width) > play.x &&
+				(play.y + (play.direction.y*play.speed/30)) + play_height > obj.y &&
+				(obj.y + play_height) > play.y;
+}
+
 function gameLoop() {
-	//Object.keys(userInputs).forEach(processInput);
-	//processUserInputs();
 	updateEnvironment();
 	io.emit('updateEnvironment', environment);
 }
@@ -121,7 +144,9 @@ setInterval(gameLoop, 1000/30);
 
 function newConnection(socket){
 	environment.players[ident] = {direction : {x : 0, y: 0}, speed : 400, x : Math.random()*849, y: Math.random()*499, ident : ident, balls : 0 };
-	environment.objects[ident_ball] = {x:0, y:0};
+	environment.objects[0] = {x:0, y:0};
+	environment.objects[1] = {x:0, y:0};
+	environment.objects[2] = {x:0, y:0};
 	socket.emit('ident', {ident: ident});
 	ident += 1;
 	socket.on('input', function(userInputs) {
