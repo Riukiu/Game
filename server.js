@@ -153,7 +153,7 @@ function collide_objects(obj1, obj2){
 
 function collide_tacos(obj1, obj2){
 	var play  = environment.players[obj2];
-	var obj = environment.tacos[obj1];
+	var obj = environment.balle[obj1];
 	return (play.x + play_width) > obj.x &&
 				(obj.x + play_width) > play.x &&
 				(play.y + play_height) > obj.y &&
