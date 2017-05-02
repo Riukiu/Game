@@ -34,8 +34,8 @@ function updatePlayer(playerId) {
 
 function updateBalls(balle_id) {
 	var tacos = environment.balle[balle_id];
-	tacos.x += tacos.direction.x/(tacos.x+1) * (tacos.p_ident.speed/30);
-	tacos.y += tacos.direction.x/(tacos.y+1) * (tacos.p_ident.speed/30);
+	tacos.x += tacos.direction.x * (tacos.p_ident.speed/30);
+	tacos.y += tacos.direction.x * (tacos.p_ident.speed/30);
 }
 
 function showObjetcs(){
