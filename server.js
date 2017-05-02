@@ -33,10 +33,9 @@ function updatePlayer(playerId) {
 }
 
 function updateBalls(balle_id) {
-	var player = environment.players[playerId];
 	var tacos = environment.balle[balle_id];
-	tacos.x += tacos.direction.x/(tacos.x+1) * (player.speed/30);
-	tacos.y += tacos.direction.x/(tacos.y+1) * (player.speed/30);
+	tacos.x += tacos.direction.x/(tacos.x+1) * (tacos.p_ident.speed/30);
+	tacos.y += tacos.direction.x/(tacos.y+1) * (tacos.p_ident.speed/30);
 }
 
 function showObjetcs(){
@@ -86,7 +85,7 @@ function processInput(input){
 			player.direction.x = 0;
 			break;
 		case 'CLICK':
-			environment.balle[ident_ball] = {direction : {x : input.mouseX, y: input.mouseY}, speed : 400, x : player.x , y: player.y, ident : ident_ball};
+			environment.balle[ident_ball] = {direction : {x : input.mouseX, y: input.mouseY}, speed : 400, x : player.x , y: player.y, ident : ident_ball, p_ident : player.ident};
 			ident_ball += 1;
 			break;
 
