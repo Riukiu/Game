@@ -92,7 +92,7 @@ function processInput(input){
 
 function onClick(input) {
 	environment.balle[ident_ball] = {direction : {x : input.mouseX, y: input.mouseY}, speed : 400, x : environment.player[input.clientId].x , y: environment.player[input.clientId].y, ident : ident_ball};
-	ident_ball += 1;
+	ident_ball = ident_ball + 1;
 
 }
 
