@@ -53,7 +53,7 @@ function showObjetcs(){
 function updateEnvironment() {
 
 	Object.keys(environment.players).forEach(updatePlayer);
-	Object.keys(environment.balle).forEach(updateBalls);
+	//Object.keys(environment.balle).forEach(updateBalls);
 	Object.keys(environment.objects).forEach(showObjetcs);
 }
 

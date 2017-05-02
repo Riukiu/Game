@@ -53,7 +53,7 @@ function renderLoop(){
 	context.clearRect(0,0,canvas.width,canvas.height);
 	context.drawImage(background,0,0);
 	Object.keys(environment.players).forEach(drawPlayer);
-	Object.keys(environment.balle).forEach(drawBalle);
+	//Object.keys(environment.balle).forEach(drawBalle);
 	Object.keys(environment.objects).forEach(drawObject);
 	context.stroke();
 	window.requestAnimationFrame(renderLoop);
