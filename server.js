@@ -53,7 +53,7 @@ function showObjetcs(){
 function updateEnvironment() {
 
 	Object.keys(environment.players).forEach(updatePlayer);
-	//Object.keys(environment.balle).forEach(updateBalls);
+	Object.keys(environment.balle).forEach(updateBalls);
 	Object.keys(environment.objects).forEach(showObjetcs);
 }
 
@@ -84,18 +84,18 @@ function processInput(input){
 		case 'RIGHT_RELEASED':
 			player.direction.x = 0;
 			break;
-//		case 'CLICK':
-//			onClick(input);
+	case 'CLICK':
+			onClick(input);
 
 	}
 }
-/*
+
 function onClick(input) {
 	environment.balle[ident_ball] = {direction : {x : input.mouseX, y: input.mouseY}, speed : 400, x : environment.player[input.clientId].x , y: environment.player[input.clientId].y, ident : ident_ball};
 	ident_ball += 1;
 
 }
-*/
+
 function resolveColisionsPlayers(ide){
 	for (var i in environment.players) {
 		if (i != ide){
