@@ -125,14 +125,14 @@ function resolveColisionsObjects(ide){
 
 function resolveColisionsTacos(ide){
 	for (var i in environment.players){
-		if (environment.balle[ide].p_ident == i.ident){
-			return false;
-		}
-		else{
+		//if (environment.balle[ide].p_ident == i.ident){
+			//return false;
+		//}
+		//else{
 			if(collide_tacos(ide, i)){
 				return true;
 			}
-		}
+		//}
 	}
 	return false;
 }
