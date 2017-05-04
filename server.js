@@ -125,6 +125,8 @@ function resolveColisionsObjects(ide){
 
 function resolveColisionsTacos(ide){
 	for (var i in environment.players){
+		console.log(environment.balle[ide].p_ident);
+		console.log(i.ident);
 		if (environment.balle[ide].p_ident != i.ident){
 			if(collide_tacos(ide, i)){
 				return true;
