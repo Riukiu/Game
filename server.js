@@ -43,6 +43,8 @@ function updateBalls(balle_id) {
 	else {
 		tacos.x = 50000;
 		tacos.y = 50000;
+		player.balls += 1;
+		console.log("Score Player " +player.ident+" : " + player.balls);
 	}
 
 }
@@ -125,8 +127,6 @@ function resolveColisionsObjects(ide){
 
 function resolveColisionsTacos(ide){
 	for (var i in environment.players){
-		console.log(environment.balle[ide].p_ident);
-		console.log(i.ident);
 		if (environment.balle[ide].p_ident != environment.players[i].ident){
 			if(collide_tacos(ide, i)){
 				return true;
