@@ -94,7 +94,7 @@ function processInput(input){
 			player.direction.x = 0;
 			break;
 		case 'CLICK':
-			environment.balle[ident_ball] = {direction : {x : input.mouseX, y: input.mouseY}, speed : 400, x : player.x + ((input.mouseX - player.x)*(1/30)) , y: player.y + ((input.mouseY - player.y)*(1/30)), ident : ident_ball, p_ident : player.ident};
+			environment.balle[ident_ball] = {direction : {x : input.mouseX, y: input.mouseY}, speed : 400, x : player.x + ((input.mouseX - player.x)*(1/4)) , y: player.y + ((input.mouseY - player.y)*(1/4)), ident : ident_ball, p_ident : player.ident};
 			ident_ball += 1;
 			break;
 
