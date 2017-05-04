@@ -94,7 +94,7 @@ function processInput(input){
 			player.direction.x = 0;
 			break;
 		case 'CLICK':
-			environment.balle[ident_ball] = {direction : {x : input.mouseX, y: input.mouseY}, speed : 400, x : player.x + (input.mouseX - player.x), y: player.y + (input.mouseY - player.y), ident : ident_ball, p_ident : player.ident};
+			environment.balle[ident_ball] = {direction : {x : input.mouseX, y: input.mouseY}, speed : 400, x : player.x, y: player.y, ident : ident_ball, p_ident : player.ident};
 			ident_ball += 1;
 			break;
 
@@ -125,8 +125,13 @@ function resolveColisionsObjects(ide){
 
 function resolveColisionsTacos(ide){
 	for (var i in environment.players){
-		if(collide_tacos(ide, i)){
-			return true;
+		if (environment.balle[ide].p_ident == i.ident){
+			return false;
+		}
+		else{
+			if(collide_tacos(ide, i)){
+				return true;
+			}
 		}
 	}
 	return false;
