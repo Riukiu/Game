@@ -25,7 +25,7 @@ var environment = {
 function drawPlayer(playerId) {
 	var player = environment.players[playerId];
 	context.drawImage(imagepointeur, player.x, player.y, 80,80);
-	context.fillText(player.ident + " : " + player.balls, player.x - 20, player.y);
+	context.fillText(player.ident + " : " + player.balls, player.x, player.y + 5);
 }
 
 function drawBalle(balls){
