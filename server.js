@@ -41,10 +41,10 @@ function updateBalls(balle_id) {
 		tacos.y += tacos.direction.y * (1/30);
 	}
 	else {
-		tacos.x = 50000;
-		tacos.y = 50000;
+		delete environment.balle[balle_id];
+		//tacos.x = 50000;
+		//tacos.y = 50000;
 		player.balls += 1;
-		console.log("Score Player " +player.ident+" : " + player.balls);
 	}
 
 }
