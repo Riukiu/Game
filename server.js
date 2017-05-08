@@ -37,12 +37,11 @@ function updateBalls(balle_id) {
 	var player = environment.players[tacos.p_ident];
 	var colisionsTacos = resolveColisionsTacos(balle_id);
 	if (!colisionsTacos){
-		tacos.x += (tacos.direction.x - player.x) * (1/30);
-		tacos.y += (tacos.direction.y - player.y) * (1/30);
+		tacos.x += tacos.direction.x * (1/30);
+		tacos.y += tacos.direction.y * (1/30);
 	}
 	else {
-		tacos.x = 50000;
-		tacos.y = 50000;
+		delete tacos;
 		player.balls += 1;
 		console.log("Score Player " +player.ident+" : " + player.balls);
 	}
@@ -99,7 +98,7 @@ function processInput(input){
 			player.name = input.nom;
 			break;
 		case 'CLICK':
-			environment.balle[ident_ball] = {direction : {x : input.mouseX, y: input.mouseY}, speed : 400, x : player.x, y: player.y, ident : ident_ball, p_ident : player.ident};
+			environment.balle[ident_ball] = {direction : {x : (input.mouseX - player.x), y: (input.mouseY - player.y)}, speed : 400, x : player.x, y: player.y, ident : ident_ball, p_ident : player.ident};
 			ident_ball += 1;
 			break;
 
