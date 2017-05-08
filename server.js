@@ -95,6 +95,9 @@ function processInput(input){
 		case 'RIGHT_RELEASED':
 			player.direction.x = 0;
 			break;
+		case 'NAME':
+			player.name = input.nom;
+			break;
 		case 'CLICK':
 			environment.balle[ident_ball] = {direction : {x : input.mouseX, y: input.mouseY}, speed : 400, x : player.x, y: player.y, ident : ident_ball, p_ident : player.ident};
 			ident_ball += 1;
@@ -171,7 +174,7 @@ function gameLoop() {
 setInterval(gameLoop, 1000/30);
 
 function newConnection(socket){
-	environment.players[ident] = {direction : {x : 0, y: 0}, speed : 400, x : Math.random()*849, y: Math.random()*499, ident : ident, balls : 0 };
+	environment.players[ident] = {direction : {x : 0, y: 0}, speed : 400, x : Math.random()*849, y: Math.random()*499, ident : ident, balls : 0, name : null };
 	environment.objects[0] = {x:0, y:0};
 	environment.objects[1] = {x:0, y:0};
 	environment.objects[2] = {x:0, y:0};

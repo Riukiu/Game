@@ -25,7 +25,7 @@ var environment = {
 function drawPlayer(playerId) {
 	var player = environment.players[playerId];
 	context.drawImage(imagepointeur, player.x, player.y, 80,80);
-	context.fillText(player.ident + " : " + player.balls, player.x, player.y + 5);
+	context.fillText(player.name + " : " + player.balls, player.x, player.y + 5);
 }
 
 function drawBalle(balls){
@@ -66,6 +66,8 @@ socket.on('updateEnvironment', function(newEnvironment){
 
 socket.on('ident', function(data) {
 	ident = data.ident;
+	var name = prompt("Choisissez un nom :");
+	socket.emit('input', {cmd: 'NAME', clientId : ident, nom : name});
 
 });
 
