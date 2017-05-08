@@ -41,7 +41,8 @@ function updateBalls(balle_id) {
 		tacos.y += tacos.direction.y * (1/30);
 	}
 	else {
-		delete tacos;
+		tacos.x = 50000;
+		tacos.y = 50000;
 		player.balls += 1;
 		console.log("Score Player " +player.ident+" : " + player.balls);
 	}
@@ -186,8 +187,12 @@ function newConnection(socket){
 	socket.on('disconnect', function(input){
 		for (var i in environment.players){
 			if (environment.players[i].socket == socket.id) {
+				for (var y in environment.balle) {
+					if (environment.balle[y].p_ident == i ) {
+						delete environment.balle[y];
+					}
+				}
 				delete environment.players[i];
-				break;
 			}
 		}
 	});
