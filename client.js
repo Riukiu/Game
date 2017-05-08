@@ -66,7 +66,7 @@ socket.on('updateEnvironment', function(newEnvironment){
 
 socket.on('ident', function(data) {
 	ident = data.ident;
-	var name = prompt("Choisissez un nom :");
+	var name = prompt("Pseudo :");
 	socket.emit('input', {cmd: 'NAME', clientId : ident, nom : name});
 
 });
