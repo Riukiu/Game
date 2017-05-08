@@ -174,7 +174,7 @@ function gameLoop() {
 setInterval(gameLoop, 1000/30);
 
 function newConnection(socket){
-	environment.players[ident] = {direction : {x : 0, y: 0}, speed : 400, x : Math.random()*849, y: Math.random()*499, ident : ident, balls : 0, name : null };
+	environment.players[ident] = {direction : {x : 0, y: 0}, speed : 400, x : Math.random()*849, y: Math.random()*499, ident : ident, balls : 0, name : null, socket : socket.id };
 	environment.objects[0] = {x:0, y:0};
 	environment.objects[1] = {x:0, y:0};
 	environment.objects[2] = {x:0, y:0};
@@ -183,6 +183,14 @@ function newConnection(socket){
 	socket.on('input', function(userInputs) {
 		processInput(userInputs);
 
+	});
+	socket.on('disconnect', function(input){
+		for (var i in environment.players){
+			if (environment.players[i].socket == socket.id) {
+				delete environment.players[i];
+				break;
+			}
+		}
 	});
 }
 io.on('connection', newConnection);
