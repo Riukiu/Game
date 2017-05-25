@@ -35,8 +35,8 @@ function updatePlayer(playerId) {
 function updateBalls(balle_id) {
 	var tacos = environment.balle[balle_id];
 	var player = environment.players[tacos.p_ident];
-	var colisionsTacos = resolveColisionsTacos(balle_id);
-	if (!colisionsTacos){
+	var colisionsBalle = resolvecolisionsBalle(balle_id);
+	if (!colisionsBalle){
 		tacos.x += tacos.direction.x * (1/30);
 		tacos.y += tacos.direction.y * (1/30);
 	}
@@ -128,10 +128,10 @@ function resolveColisionsObjects(ide){
 }
 
 
-function resolveColisionsTacos(ide){
+function resolvecolisionsBalle(ide){
 	for (var i in environment.players){
 		if (environment.balle[ide].p_ident != environment.players[i].ident){
-			if(collide_tacos(ide, i)){
+			if(collide_balles(ide, i)){
 				return true;
 			}
 		}
@@ -158,7 +158,7 @@ function collide_objects(obj1, obj2){
 				(obj.y + play_height) > play.y;
 }
 
-function collide_tacos(obj1, obj2){
+function collide_balles(obj1, obj2){
 	var play  = environment.players[obj2];
 	var obj = environment.balle[obj1];
 	return (play.x + play_width) > obj.x &&

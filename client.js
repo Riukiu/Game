@@ -11,7 +11,7 @@ var stone = new Image();
 
 imagepointeur.src = 'http://www.clipartkid.com/images/667/understanding-stereotypes-canada-vs-america-change-the-topic-zbYWuV-clipart.png';
 background.src = 'http://pingouin.migrateur.free.fr/voyages/mexique/desert1.jpg';
-balle.src = 'http://www.fancyicons.com/free-icons/233/fast-foods/png/32/taco_32.png';
+balle.src = 'http://images.vectorhq.com/images/thumbs/ae6/sombrero-107306.png';
 obstacle.src = 'http://img1.wikia.nocookie.net/__cb20140622060452/plantsvszombies/images/f/f0/138px-CactusPvZAS.png';
 stone.src = 'http://www.pngall.com/wp-content/uploads/2016/03/Camel-PNG.png';
 
@@ -30,16 +30,8 @@ function drawPlayer(playerId) {
 
 function drawBalle(balls){
 	var tacos = environment.balle[balls];
-	context.drawImage(balle, tacos.x, tacos.y);
+	context.drawImage(balle, tacos.x, tacos.y, 40,40);
 }
-
-/*
-function drawObject(cactusId) {
-var cactus = environment.objects[cactusId];
-context.drawImage(obstacle, cactus.x, cactus.y, 80, 120);
-
-}
-*/
 
 function drawObject() {
 var cactus1 = environment.objects[0];
@@ -100,4 +92,3 @@ $(document).on('click', function(event){
 	socket.emit('input', {cmd: 'CLICK', clientId : ident, mouseX : event.originalEvent.clientX, mouseY : event.originalEvent.clientY});
 	console.log(event);
 });
-
